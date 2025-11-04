@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Presentasi DVTEAM NP</title>
+    <style>
+        /* CSS Reset & Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
+        }
+
+        /* Slide Container */
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Sembunyikan slide 2 secara default */
+        #slide2 {
+            display: none;
+            background-size: cover;
+            background-position: center;
+            /* Ganti 'background.jpg' dengan nama file gambar keluarga Anda */
+            background-image: url('background.jpg');
+        }
+
+        /* --- Konten Slide 1 --- */
+        #slide1-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 25px;
+            /* Ganti 'logo.jpg' dengan nama file logo naga 'V' Anda */
+            content: url('logo.jpg');
+        }
+
+        .motivational-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .audio-button {
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #111;
+            background-color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .audio-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* --- Konten Slide 2 --- */
+
+        /* Tombol Tutup (X) */
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1001;
+            font-weight: bold;
+        }
+
+        /* Kontainer Pemutar Audio Profesional */
+        .audio-player-container {
+            position: absolute;
+            bottom: 30px; /* Jarak dari bawah */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .custom-player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        #playPauseBtn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 15px;
+        }
+
+        #playPauseBtn .icon {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        /* Sembunyikan ikon pause secara default */
+        #playPauseBtn .pause-icon {
+            display: none;
+        }
+
+        .timeline {
+            flex-grow: 1;
+            margin: 0 15px;
+        }
+        
+        #seekBar {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        #seekBar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #seekBar::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .time-display {
+            font-size: 0.9rem;
+            color: #fff;
+            min-width: 45px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="slide1" class="slide" style="display: flex;">
+        <div id="slide1-content">
+            <img src="logo.jpg" alt="Logo DVTEAM" class="logo">
+            
+            <p class="motivational-text">
+                "Ini bukan lagi soal trading sendirian, penuh cemas di depan layar...<br>
+                Ini soal membangun komunitas, memimpin tim, dan meraih sukses bersama."
+            </p>
+            
+            <button id="openSlide2" class="audio-button">Materi Audio</button>
+        </div>
+    </div>
+
+    <div id="slide2" class="slide">
+        
+        <button id="closeSlide2" class="close-button">&times;</button>
+
+        <audio id="audioElement" src="presentasiSINGKAT.mp3" preload="metadata"></audio>
+
+        <div class="audio-player-container">
+            <div class="custom-player-controls">
+                
+                <button id="playPauseBtn">
+                    <svg class="icon play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="icon pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+
+                <div class="timeline">
+                    <input type="range" id="seekBar" value="0" step="0.1">
+                </div>
+
+                <div id="timeDisplay" class="time-display">0:00</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Ambil semua elemen yang diperlukan ---
+        const slide1 = document.getElementById('slide1');
+        const slide2 = document.getElementById('slide2');
+        const openButton = document.getElementById('openSlide2');
+        const closeButton = document.getElementById('closeSlide2');
+        
+        const audio = document.getElementById('audioElement');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = playPauseBtn.querySelector('.play-icon');
+        const pauseIcon = playPauseBtn.querySelector('.pause-icon');
+        const seekBar = document.getElementById('seekBar');
+        const timeDisplay = document.getElementById('timeDisplay');
+
+        const elem = document.documentElement; // Target untuk fullscreen
+
+        // --- Fungsi Fullscreen ---
+        
+        /* Buka Fullscreen */
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari, Chrome (termasuk Android) */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+            // Catatan: iPhone (iOS) TIDAK mengizinkan fullscreen API untuk elemen biasa,
+            // hanya untuk <video>. CSS kami (height: 100%) adalah fallback terbaik.
+        }
+
+        /* Tutup Fullscreen */
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari, Chrome, Android */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            }
+        }
+
+        // --- Kontrol Slide ---
+
+        openButton.addEventListener('click', () => {
+            slide1.style.display = 'none';
+            slide2.style.display = 'flex';
+            openFullscreen();
+            audio.play(); // Langsung putar audio
+        });
+
+        closeButton.addEventListener('click', () => {
+            slide2.style.display = 'none';
+            slide1.style.display = 'flex';
+            closeFullscreen();
+            audio.pause();
+            audio.currentTime = 0; // Reset audio ke awal
+        });
+
+        // --- Logika Pemutar Audio Kustom ---
+
+        // Fungsi format waktu (misal: 125 detik -> "2:05")
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Saat audio dimuat, update durasi total dan max seek bar
+        audio.addEventListener('loadedmetadata', () => {
+            seekBar.max = audio.duration;
+            timeDisplay.textContent = formatTime(audio.duration);
+        });
+
+        // Update tampilan tombol Play/Pause
+        function updatePlayPauseIcon() {
+            if (audio.paused) {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            } else {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }
+        }
+
+        // Event listener untuk tombol Play/Pause
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+
+        // Update ikon saat status play/pause berubah
+        audio.addEventListener('play', updatePlayPauseIcon);
+        audio.addEventListener('pause', updatePlayPauseIcon);
+
+        // Update seek bar dan waktu saat audio berjalan
+        audio.addEventListener('timeupdate', () => {
+            seekBar.value = audio.currentTime;
+            // Tampilkan waktu berjalan ATAU durasi total jika tidak bergerak
+            if (audio.currentTime > 0) {
+                timeDisplay.textContent = formatTime(audio.currentTime);
+            } else {
+                timeDisplay.textContent = formatTime(audio.duration);
+            }
+        });
+
+        // Event listener untuk seek bar (saat digeser)
+        seekBar.addEventListener('input', () => {
+            audio.currentTime = seekBar.value;
+        });
+
+        // Reset saat audio selesai
+        audio.addEventListener('ended', ()Ganti {
+            updatePlayPauseIcon();
+            seekBar.value = 0;
+            timeDisplay.textContent = formatTime(audio.duration);
+        });
+
+    </script>
+</body>
+</html>
